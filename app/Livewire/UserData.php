@@ -23,7 +23,10 @@ class UserData extends Component
 
 	public function render()
 	{
-		$data['users'] = User::when($this->search, fn(Builder $query) => $query->where('name', $this->search))->paginate(10);
+		$data['users'] = User::when($this->search, fn(Builder $query) => $query->where('name',  'like', "%{$this->search}%"))
+			->when($this->search_user_id, fn(Builder $query) => $query->where('id', $this->search_user_id))
+			->latest()
+			->paginate(10);
 		return view('livewire.user-data', $data);
 	}
 

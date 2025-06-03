@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'layout' => 'components.layouts.maryui.app',
+    'layout' => 'components.layouts.app',
 
     /*
     |---------------------------------------------------------------------------

@@ -9,11 +9,6 @@
 				:options="$all_user" placeholder="Search ..." single clearable searchable option-value="id" option-label="name" option-sub-label="email"/>
 	</div>
 
-
-
-
-
-
 	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 		<div class="overflow-x-auto">
 			<table class="table">

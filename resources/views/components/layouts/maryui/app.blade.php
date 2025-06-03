@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light" data-theme="light" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,25 +9,50 @@
 	<link rel="preconnect" href="https://fonts.bunny.net">
 	<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
 
-	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen font-sans antialiased bg-base-200">
 
 <x-nav sticky full-width>
-
 	<x-slot:brand>
 		{{-- Drawer toggle for "main-drawer" --}}
 		<label for="main-drawer" class="lg:hidden mr-3">
 			<x-icon name="o-bars-3" class="cursor-pointer"/>
 		</label>
 		{{-- Brand --}}
-		<div>{{config('app.name')}}</div>
+		<a href="{{config('app.url')}}" class="ms-2 text-2xl font-bold bg-clip-text text-transparent">
+			{{config('app.name')}}
+		</a>
 	</x-slot:brand>
 
-	{{-- Right side actions --}}
 	<x-slot:actions>
-{{--		<x-theme-toggle/>--}}
+		<x-theme-toggle/>
+
+		<div class="dropdown dropdown-end">
+			<label tabindex="0" class="btn btn-ghost btn-circle avatar">
+				<x-heroicon-m-cube-transparent class="h-5 w-5"/>
+
+			</label>
+			<ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 max-w-6xl p-2 shadow">
+				<li>
+					<a class="flex items-center w-full px-3 py-2  rounded-md transition-colors duration-200 text-base  {{app()->getLocale() === 'en' ? 'text-indigo-600 dark:text-indigo-400' :
+					'text-gray-700 dark:text-gray-300'}}"
+					   href="{{route('web-language','en')}}">
+{{--						<x-flag-country-us class="w-[20px] h-auto me-3"/>--}}
+						<span>English</span>
+					</a>
+				</li>
+				<li>
+					<a class="flex items-center w-full px-3 py-2  rounded-md transition-colors duration-200 text-base  {{app()->getLocale() === 'ar' ? 'text-indigo-600 dark:text-indigo-400' :
+					'text-gray-700 dark:text-gray-300'}}"
+					   href="{{route('web-language','ar')}}">
+{{--						<x-flag-country-eg class="w-[20px] h-auto me-3"/>--}}
+						<span>العربية</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
 		<x-button icon="o-bell" link="###" class="btn-ghost btn-sm" responsive/>
 		<div class="dropdown dropdown-end">
 			<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -35,7 +60,7 @@
 					<img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"/>
 				</div>
 			</div>
-			<ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+			<ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 max-w-6xl p-2 shadow">
 				<li>
 					<a class="justify-between">
 						{{ auth()->user()->name }}
@@ -48,8 +73,10 @@
 				</form>
 			</ul>
 		</div>
+
 	</x-slot:actions>
 </x-nav>
+
 
 {{-- The main content with `full-width` --}}
 <x-main with-nav full-width>
@@ -61,10 +88,10 @@
 		<x-menu activate-by-route>
 			<x-menu-item title="Home" icon="o-home" link="{{route('dashboard')}}" wire:navigate/>
 			<x-menu-item title="Users" icon="o-users" link="{{route('users')}}" wire:navigate/>
-			<x-menu-item title="Messages" icon="o-envelope" link="###"/>
-			<x-menu-sub title="Settings" icon="o-cog-6-tooth">
-				<x-menu-item title="Wifi" icon="o-wifi" link="####"/>
-				<x-menu-item title="Archives" icon="o-archive-box" link="####"/>
+			<x-menu-item title="Messages" icon="o-envelope" link="###" wire:navigate/>
+			<x-menu-sub title="Settings" icon="o-cog-6-tooth" >
+				<x-menu-item title="Wifi" icon="o-wifi" link="####" wire:navigate/>
+				<x-menu-item title="Archives" icon="o-archive-box" link="####" wire:navigate/>
 			</x-menu-sub>
 		</x-menu>
 	</x-slot:sidebar>
