@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source "../**/*.blade.php";
@@ -6,9 +8,8 @@
 @source "../../storage/framework/views/*.php";
 @source "../../vendor/robsontenorio/mary/src/View/Components/**/*.php";
 
-@plugin "daisyui";
 @theme {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Cairo', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
@@ -26,7 +27,6 @@
     --color-accent-content: var(--color-zinc-800);
     --color-accent-foreground: var(--color-white);
 }
-
 @layer theme {
     .dark {
         --color-accent: var(--color-white);
@@ -34,7 +34,6 @@
         --color-accent-foreground: var(--color-zinc-800);
     }
 }
-
 @layer base {
     *,
     ::after,
@@ -43,17 +42,29 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
 }
 
-
-/** daisyUI */
 @plugin "daisyui" {
-    themes: light --default, dark --dark;
+    themes: dark --default --prefersdark, light;
 }
 
-/* Theme toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
+.mary-table-pagination span[aria-current="page"] > span {
+    @apply bg-primary text-base-100
+}
+.mary-table-pagination button {
+    @apply cursor-pointer
+}
+
+.mary-table-pagination span[aria-current="page"] > span {
+    @apply bg-primary text-base-100
+}
+.mary-table-pagination button {
+    @apply cursor-pointer
+}
+/* Theme toggle */
 .mary-table-pagination span[aria-current="page"] > span {
     @apply bg-primary text-base-100
 }

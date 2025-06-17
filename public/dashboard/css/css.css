@@ -1,0 +1,114 @@
+.modal-box-600 {
+    max-width: 600px !important;
+}
+
+.modal-box-650 {
+    max-width: 650px !important;
+}
+
+.modal-box-700 {
+    max-width: 700px !important;
+}
+
+.modal-box-750 {
+    max-width: 750px !important;
+}
+
+.modal-box-800 {
+    max-width: 800px !important;
+}
+
+.fieldset-legend {
+    font-weight: bold;
+    font-size: 13px;
+    padding: 0;
+    margin-bottom: 5px !important;
+}
+
+/*.fieldset {*/
+/*    min-width: 250px !important;*/
+/*}*/
+
+.fl-wrapper {
+    z-index: 20000 !important;
+}
+
+.input:focus, .input:focus-within,
+.select:focus, .select:focus-within,
+.textarea:focus, .textarea:focus-within,
+.checkbox:focus, .checkbox:focus-within,
+.radio:focus, .radio:focus-within, .file-input {
+    border: 2px solid #3b25c1 !important;
+    outline: 0 !important;
+}
+
+.customs-overlay-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(255 255 255 / 12%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    user-select: none;
+}
+
+.customs-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+.bg-yellow-500 {
+    background-color: #f59e0b !important;
+    color: white;
+}
+.map-container {
+    width: 100%;
+    max-width: 900px; /* حد أقصى للعرض على الشاشات الكبيرة */
+    margin: 20px auto; /* لتوسيط الحاوية وإضافة هوامش رأسية */
+}
+
+/* اختياري: لتقليل ارتفاع الخريطة على الشاشات الصغيرة جدًا */
+@media (max-width: 600px) {
+    .map-container #regions_div {
+        height: 350px !important;
+    }
+}
+
+.loader {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid oklch(58.5% .233 277.117);
+    border-right: 4px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-bottom: 4px solid oklch(58.5% .233 277.117);
+    border-left: 4px solid transparent;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

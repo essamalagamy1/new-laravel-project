@@ -10,7 +10,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 
-new #[Layout('components.layouts.auth')] class extends Component {
+new #[Layout('components.layouts.auth', ['title' => 'reset_password'])] class extends Component {
     #[Locked]
     public string $token = '';
     public string $email = '';
@@ -68,48 +68,50 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
+<div>
+    <x-card class="flex flex-col gap-6 border border-gray-300 dark:border-gray-700 text-lg font-medium rounded-xl dark:text-gray-300 bg-white dark:bg-gray-900  transition-colors duration-200 " shadow separator>
+        <x-auth-header :title="__('lang.reset_password')" :description="__('lang.please_enter_your_new_password_below')"/>
+        @session('status')
+        <x-alert title="{{ session('status') }}" class="text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 my-4 text-center"/>
+        @endsession
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+        <form wire:submit="resetPassword" class="flex flex-col gap-6">
+            <!-- Email Address -->
+            <x-input
+                    wire:model="email"
+                    :label="__('lang.email')"
+                    type="email"
+                    required
+                    autocomplete="email"
+            />
 
-    <form wire:submit="resetPassword" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <x-input
-            wire:model="email"
-            :label="__('Email')"
-            type="email"
-            required
-            autocomplete="email"
-        />
+            <!-- Password -->
+            <x-input
+                    wire:model="password"
+                    :label="__('lang.password')"
+                    type="password"
+                    required
+                    autocomplete="new-password"
+                    :placeholder="__('lang.password')"
+                    viewable
+            />
 
-        <!-- Password -->
-        <x-input
-            wire:model="password"
-            :label="__('Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Password')"
-            viewable
-        />
+            <!-- Confirm Password -->
+            <x-input
+                    wire:model="password_confirmation"
+                    :label="__('lang.password_confirmation')"
+                    type="password"
+                    required
+                    autocomplete="new-password"
+                    :placeholder="__('lang.password_confirmation')"
+                    viewable
+            />
 
-        <!-- Confirm Password -->
-        <x-input
-            wire:model="password_confirmation"
-            :label="__('Confirm password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Confirm password')"
-            viewable
-        />
-
-        <div class="flex items-center justify-end">
-            <x-button type="submit" variant="primary" class="w-full">
-                {{ __('Reset password') }}
-            </x-button>
-        </div>
-    </form>
+            <div class="flex items-center justify-end">
+                <x-button type="submit" variant="primary" class="w-full" spinner="resetPassword">
+                    {{ __('lang.reset_password') }}
+                </x-button>
+            </div>
+        </form>
+    </x-card>
 </div>

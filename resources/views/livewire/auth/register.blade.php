@@ -8,7 +8,7 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('components.layouts.auth')] class extends Component {
+new #[Layout('components.layouts.auth', ['title' => 'register'])] class extends Component {
     public string $name = '';
     public string $email = '';
     public string $password = '';
@@ -35,65 +35,69 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+<div>
+    <x-card class="flex flex-col gap-6 border border-gray-300 dark:border-gray-700 text-lg font-medium rounded-xl dark:text-gray-300  dark:bg-gray-900  transition-colors duration-200 " shadow separator>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+        <x-auth-header :title="__('lang.create_account')" :description="__('lang.enter_your_details_below_to_create_your_account')"/>
 
-    <form wire:submit="register" class="flex flex-col gap-6">
-        <!-- Name -->
-        <x-input
-            wire:model="name"
-            :label="__('Name')"
-            type="text"
-            required
-            autofocus
-            autocomplete="name"
-            :placeholder="__('Full name')"
-        />
+        @session('status')
+        <x-alert title="{{ session('status') }}" class="text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 my-4 text-center"/>
+        @endsession
 
-        <!-- Email Address -->
-        <x-input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            required
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
+        <form wire:submit="register" class="flex flex-col gap-6">
+            <!-- Name -->
+            <x-input
+                    wire:model="name"
+                    :label="__('lang.name')"
+                    type="text"
+                    required
+                    autofocus
+                    autocomplete="name"
+                    :placeholder="__('lang.full_name')"
+            />
 
-        <!-- Password -->
-        <x-input
-            wire:model="password"
-            :label="__('Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Password')"
-            viewable
-        />
+            <!-- Email Address -->
+            <x-input
+                    wire:model="email"
+                    :label="__('lang.email')"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    placeholder="email@example.com"
+            />
 
-        <!-- Confirm Password -->
-        <x-input
-            wire:model="password_confirmation"
-            :label="__('Confirm password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Confirm password')"
-            viewable
-        />
+            <!-- Password -->
+            <x-input
+                    wire:model="password"
+                    :label="__('lang.password')"
+                    type="password"
+                    required
+                    autocomplete="new-password"
+                    :placeholder="__('lang.password')"
+                    viewable
+            />
 
-        <div class="flex items-center justify-end">
-            <x-button type="submit" variant="primary" class="w-full">
-                {{ __('Create account') }}
-            </x-button>
+            <!-- Confirm Password -->
+            <x-input
+                    wire:model="password_confirmation"
+                    :label="__('lang.password_confirmation')"
+                    type="password"
+                    required
+                    autocomplete="new-password"
+                    :placeholder="__('lang.password_confirmation')"
+                    viewable
+            />
+
+            <div class="flex items-center justify-end">
+                <x-button type="submit" variant="primary" class="w-full" spinner="register">
+                    {{ __('lang.create_account') }}
+                </x-button>
+            </div>
+        </form>
+
+        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400 mt-3">
+            {{ __('lang.already_have_an_account') }}
+            <a class="link" href="{{route('login')}}" wire:navigate>{{ __('lang.login') }}</a>
         </div>
-    </form>
-
-    <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-        {{ __('Already have an account?') }}
-        <a class="link" href="{{route('login')}}" wire:navigate>{{ __('Log in') }}</a>
-    </div>
+    </x-card>
 </div>
