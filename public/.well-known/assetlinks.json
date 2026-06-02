@@ -1,0 +1,15 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.easyta3lim.app",
+            "sha256_cert_fingerprints": [
+                "BA:2A:82:71:35:7B:D2:82:97:92:96:1A:CF:84:09:93:43:2C:8F:BF:8D:9C:48:17:EF:7E:98:48:3D:F7:83:45",
+                "BA:2A:82:71:35:7B:D2:82:97:92:96:1A:CF:84:09:93:43:2C:8F:BF:8D:9C:48:17:EF:7E:98:48:3D:F7:83:45"
+            ]
+        }
+    }
+]
